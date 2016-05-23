@@ -42,8 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.layout_toverify:
-                CustomToast.showMessage(this, "待审核",
-                        Toast.LENGTH_SHORT, CustomToast.CENTER);
+                Intent intentVerify=new Intent();
+                intentVerify.setClass(this,VerifyActivity.class);
+                startActivity(intentVerify);
                 break;
             case R.id.layout_toreply:
                 CustomToast.showMessage(this, "待回复",
