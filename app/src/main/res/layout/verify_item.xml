@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingTop="5dp">
+
+    <TextView
+        android:id="@+id/txt_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="29日的67路早上7:20左右行驶到龙山路上时一位盲人乘客，师傅提示让座，等他坐稳后再启动车辆。"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/txt_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="04月13日 15:20"
+        android:textColor="@color/item_time"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/txt_id"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_reject"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_reject_selector"
+            android:drawableLeft="@mipmap/btn_reject_left"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="否决"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_agree"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_agree_selector"
+            android:drawableLeft="@mipmap/btn_agree_left"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="通过"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@drawable/division_shape" />
+</LinearLayout>

@@ -26,9 +26,9 @@ public class VerifyHolder extends BGARefreshViewHolder {
     private ImageView mHeaderArrowIv;
     private ImageView mHeaderChrysanthemumIv;
     private AnimationDrawable mHeaderChrysanthemumAd;
-    private String mPullDownRefreshText = "下拉刷新!!";
-    private String mReleaseRefreshText = "释放更新!!";
-    private String mRefreshingText = "加载中!!...";
+    private String mPullDownRefreshText = "下拉刷新";
+    private String mReleaseRefreshText = "释放更新";
+    private String mRefreshingText = "加载中...";
     private boolean isRefreshEnabled = true;
     /** 判断是否使用上拉加载 */
     private boolean mIsLoadingMoreEnabled = true;

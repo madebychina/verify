@@ -1,6 +1,7 @@
 package com.ql1d.verify;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
@@ -11,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ql1d.util.CustomToast;
 import com.ql1d.verify.bgarefreshlayoutviewholder.VerifyHolder;
+import com.ql1d.verify.model.VerifyList;
 import com.ql1d.verify.recycleradapter.RecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -27,7 +30,7 @@ public class VerifyActivity extends BaseActivity implements BGARefreshLayout.BGA
     private TextView txt_title;
     private ImageView img_back;
     /** 数据 */
-    private List<String> mListData = new ArrayList<String>();
+    private List<VerifyList> mListData = new ArrayList<VerifyList>();
     /** 一次加载数据的条数 */
     private int DATASIZE = 10;
     /** 数据填充adapter */
@@ -82,7 +85,7 @@ public class VerifyActivity extends BaseActivity implements BGARefreshLayout.BGA
         mDefineBAGRefreshWithLoadView = new VerifyHolder(mContext , true , true);
         //设置刷新样式
         mBGARefreshLayout.setRefreshViewHolder(mDefineBAGRefreshWithLoadView);
-        mDefineBAGRefreshWithLoadView.updateLoadingMoreText("自定义加载更多");
+        mDefineBAGRefreshWithLoadView.updateLoadingMoreText("加载更多...");
     }
     /** 设置RecyclerView的布局方式 */
     private void setRecyclerView(){
@@ -118,7 +121,11 @@ public class VerifyActivity extends BaseActivity implements BGARefreshLayout.BGA
      * */
     private void setData() {
         for(int i = 0 ; i < DATASIZE ; i++){
-            mListData.add("第" + (ALLSUM * 10 + i) +"条数据");
+            VerifyList verifyList=new VerifyList();
+            verifyList.setContent("第" + (ALLSUM * 10 + i) +"条数据\n29日的67路早上7:20左右行驶到龙山路上时一位盲人乘客，师傅提示让座，等他坐稳后再启动车辆。");
+            verifyList.setTime("04月13日 15:20:"+i);
+            verifyList.setInner_id(String.valueOf(i));
+            mListData.add(verifyList);
         }
         if(ALLSUM == 0){
             setRecyclerCommadapter();
@@ -134,19 +141,22 @@ public class VerifyActivity extends BaseActivity implements BGARefreshLayout.BGA
         mRecyclerViewAdapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Toast.makeText(mContext, "onclick  " + position, Toast.LENGTH_SHORT).show();
+                Intent intent =new Intent();
+                intent.setClass(VerifyActivity.this,VerifyDetailActivity.class);
+                startActivity(intent);
             }
 
             @Override
             public void onItemLongClick(View v, int position) {
-                Toast.makeText(mContext, "onlongclick  " + position, Toast.LENGTH_SHORT).show();
+                CustomToast.showMessage(mContext, "长按了第"+position+"条数据",
+                        Toast.LENGTH_SHORT, CustomToast.CENTER);
             }
         });
     }
     /** 刷新 */
     @Override
     public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-        mDefineBAGRefreshWithLoadView.updateLoadingMoreText("自定义加载更多");
+        mDefineBAGRefreshWithLoadView.updateLoadingMoreText("加载更多...");
         mDefineBAGRefreshWithLoadView.showLoadingMoreImg();
         ALLSUM = 0;
         handler.sendEmptyMessageDelayed(0 , 2000);
@@ -156,7 +166,7 @@ public class VerifyActivity extends BaseActivity implements BGARefreshLayout.BGA
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
         if(ALLSUM == 2){
             /** 设置文字 **/
-            mDefineBAGRefreshWithLoadView.updateLoadingMoreText("没有更多数据");
+            mDefineBAGRefreshWithLoadView.updateLoadingMoreText("已经到底了");
             /** 隐藏图片 **/
             mDefineBAGRefreshWithLoadView.hideLoadingMoreImg();
             handler.sendEmptyMessageDelayed(2 , 2000);
